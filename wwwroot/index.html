@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Real-Time App</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="userInput" placeholder="Name" />
+        <input type="text" id="messageInput" placeholder="Message" />
+        <button onclick="sendMessage()">Send Message</button>
+    </div>
+    <ul id="messagesList"></ul>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:61449/chatHub")
+            .build();
+
+        connection.on("ReceiveMessage", (user, message) => {
+            const li = document.createElement("li");
+            li.textContent = `${user}: ${message}`;
+            document.getElementById("messagesList").appendChild(li);
+        });
+
+       
+        // Start the connection
+        connection.start()
+            .then(() => console.log("Connected to SignalR hub!"))
+            .catch(err => console.error("Error while starting connection: " + err));
+
+        function sendMessage() {
+            const user = document.getElementById("userInput").value;
+            const message = document.getElementById("messageInput").value;
+            // Ensure connection is in 'Connected' state before sending
+            if (connection.state === signalR.HubConnectionState.Connected) {
+                connection.invoke("SendMessage", user, message)
+                    .catch(err => console.error(err));
+            } else {
+                console.error("Connection is not established yet.");
+            }
+        }
+    </script>
+</body>
+</html>
