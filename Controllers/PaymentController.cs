@@ -131,7 +131,7 @@ namespace FgssrApi.Controllers
         public async Task<IActionResult> CalculateProcessHmacAndCompare([FromBody] CallBackDataDto data , [FromQuery] string hmac)
         {
 
-            string myHmacKey = "F95A2A2D09297C3D4BF91DFE2A5F3EDC";
+            string myHmacKey = "add your hmac";
 
             var concatenatedData = ConcatenateHmacData(data);
             var calculatedHmac = CalculateHMAC(myHmacKey,concatenatedData);
