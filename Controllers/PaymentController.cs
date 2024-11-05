@@ -25,7 +25,7 @@ namespace FgssrApi.Controllers
         public async Task<IActionResult> GetPaymentSecret([FromBody] PaymentRequestDto prd)
         {
             var url = "https://accept.paymob.com/v1/intention/";
-            var secretKey = "egy_sk_test_1db699f2c8335f53ed02946fea740d4c99a0d63f1ed737839a8c3e9ff70096c2";
+            var secretKey = "add your secret";
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", secretKey);
             var paymentRequestData = new PaymentRequestDto
@@ -50,7 +50,7 @@ namespace FgssrApi.Controllers
         public async Task<IActionResult> GetPaymentAuthToken()
         {
             var url = "https://accept.paymob.com/api/auth/tokens";
-            var apiKey = "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T1RnMk9UYzJMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuTUUycGgwTjBPN3RpaFNKOHNfbVVKMXhsSkEyTnVjZlFqTnRSVzhkSW9fMG8wVUNLYlhTS3VyZEx6NXVKRUQ2c2k0T0Z0WWZlUEFMeUU2TWNtcG9zV3c=";
+            var apiKey = "add your api key ";
             using var client = new HttpClient();
 
             var paymentRequestData = new 
@@ -110,7 +110,7 @@ namespace FgssrApi.Controllers
         public async Task<IActionResult> RefundTransactionById([FromBody] PaymentRequestDto prd)
         {
             var url = "https://accept.paymob.com/api/acceptance/void_refund/refund";
-            var secretKey = "egy_sk_test_1db699f2c8335f53ed02946fea740d4c99a0d63f1ed737839a8c3e9ff70096c2";
+            var secretKey = "add your secret";
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", secretKey);
             var paymentRequestData = new PaymentRequestDto
@@ -157,7 +157,7 @@ namespace FgssrApi.Controllers
         public async Task<IActionResult> CalculateResponseHmacAndCompare([FromQuery] CallBackDataDto data, [FromQuery] string hmac)
         {
 
-            string myHmacKey = "F95A2A2D09297C3D4BF91DFE2A5F3EDC";
+            string myHmacKey = "add your hmac";
 
             var concatenatedData = ConcatenateHmacData(data);
             var calculatedHmac = CalculateHMAC(myHmacKey, concatenatedData);
